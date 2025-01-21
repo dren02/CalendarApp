@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="http://classes.engineering.wustl.edu/cse330/content/calendar.min.js"></script>
+    <script src="calendar.min.ext.js"></script>
+    <title>Calendar</title>
+    <link rel="stylesheet" type="text/css" href="calendar.css">
+
+    <!-- popup -->
+    <script src="vex.combined.min.js"></script>
+    <script>vex.defaultOptions.className = 'vex-theme-flat-attack'</script>
+    <script src="newevent.js"></script>
+    <script src="gettoken.js"></script>
+    <link rel="stylesheet" href="vex.css">
+    <link rel="stylesheet" href="vex-theme-flat-attack.css">
+</head>
+
+<body>
+    <script src="edit_del_event.js"></script>
+    <script src="calendar.js"></script>
+    <script src="login.js"></script>
+    <input type="hidden" id="csrf" value="null">
+    <div class=log_sign>
+            <div class="login">
+                <!-- returning user login -->
+                Log in
+                <input type="text" id="username" placeholder="Username">
+                <input type="password" id="password" placeholder="Password">
+                <button id="login_btn">Log In</button>
+                <br>
+            </div>
+
+            <!-- new user signup -->
+            <div class="signup">
+                Sign up
+                <input type="text" id="usersignup" placeholder="Username">
+                <input type="password" id="pwsignup" placeholder="Password">
+                <button id="signup_btn">Sign up</button>
+                <script src="signup.js"></script>
+            </div>
+        </div>
+        <div id="calendar-header">
+            <div id="nav-buttons">
+                <button id="prevMonth">Previous</button>
+                <button id="nextMonth">Next</button>
+            </div>
+        </div>
+
+        <div id="loginMessage"></div>
+        <div id="signupMessage"></div>
+
+        <!-- Only logged in users can see -->
+        <button id="logoutButton" hidden>Logout</button>
+        <script src="logout.js"></script>
+        <button id="new_event" hidden>Create Event</button>
+        <!-- <div id="eventcreated"></div>
+        <div id="modify_btn">
+            <button class="edit" id="edit" hidden>Edit</button>
+            <button class="delete" id="delete" hidden>Delete</button>
+        </div> -->
+    <table id="calendar">
+        <caption id="calendartitle"></caption>
+        <tr class="weekdays">
+            <th scope="col">Sunday</th>
+            <th scope="col">Monday</th>
+            <th scope="col">Tuesday</th>
+            <th scope="col">Wednesday</th>
+            <th scope="col">Thursday</th>
+            <th scope="col">Friday</th>
+            <th scope="col">Saturday</th>
+        </tr>
+        <!-- First week of month -->
+        <tr class="days" id="firstweek">
+            <td class="day">
+                <div class="date"></div>
+            </td>
+            <td class="day">
+                <div class="date"></div>
+            </td>
+            <td class="day">
+                <div class="date"></div>
+            </td>
+            <td class="day">
+                <div class="date"></div>
+            </td>
+            <td class="day">
+                <div class="date"></div>
+            </td>
+            <td class="day">
+                <div class="date"></div>
+            </td>
+            <td class="day">
+                <div class="date"></div>
+            </td>
+        </tr>
+        <!-- Second week of month -->
+        <tr id="secondweek">
+            <td class="day">
+                <div class="date"></div>
+            </td>
+            <td class="day">
+                <div class="date"></div>
+            </td>
+            <td class="day">
+                <div class="date"></div>
+            </td>
+            <td class="day">
+                <div class="date"></div>
+            </td>
+            <td class="day">
+                <div class="date"></div>
+            </td>
+            <td class="day">
+                <div class="date"></div>
+            </td>
+            <td class="day">
+                <div class="date"></div>
+            </td>
+        </tr>
+        <!-- Third week of month -->
+        <tr id="thirdweek">
+            <td class="day">
+                <div class="date"></div>
+            </td>
+            <td class="day">
+                <div class="date"></div>
+            </td>
+            <td class="day">
+                <div class="date"></div>
+            </td>
+            <td class="day">
+                <div class="date"></div>
+            </td>
+            <td class="day">
+                <div class="date"></div>
+            </td>
+            <td class="day">
+                <div class="date"></div>
+            </td>
+            <td class="day">
+                <div class="date"></div>
+            </td>
+        </tr>
+        <!-- Fourth week of month -->
+        <tr id="fourthweek">
+            <td class="day">
+                <div class="date"></div>
+            </td>
+            <td class="day">
+                <div class="date"></div>
+            </td>
+            <td class="day">
+                <div class="date"></div>
+            </td>
+            <td class="day">
+                <div class="date"></div>
+            </td>
+            <td class="day">
+                <div class="date"></div>
+            </td>
+            <td class="day">
+                <div class="date"></div>
+            </td>
+            <td class="day">
+                <div class="date"></div>
+            </td>
+        </tr>
+        <!-- Fifth week of month -->
+        <tr id="fifthweek">
+            <td class="day">
+                <div class="date"></div>
+            </td>
+            <td class="day">
+                <div class="date"></div>
+            </td>
+            <td class="day">
+                <div class="date"></div>
+            </td>
+            <td class="day">
+                <div class="date"></div>
+            </td>
+            <td class="day">
+                <div class="date"></div>
+            </td>
+            <td class="day">
+                <div class="date"></div>
+            </td>
+            <td class="day">
+                <div class="date"></div>
+            </td>
+        </tr>
+        <!-- Sixth week of month -->
+        <tr id="sixthweek">
+            <td class="day">
+                <div class="date"></div>
+            </td>
+            <td class="day">
+                <div class="date"></div>
+            </td>
+            <td class="day">
+                <div class="date"></div>
+            </td>
+            <td class="day">
+                <div class="date"></div>
+            </td>
+            <td class="day">
+                <div class="date"></div>
+            </td>
+            <td class="day">
+                <div class="date"></div>
+            </td>
+            <td class="day">
+                <div class="date"></div>
+            </td>
+
+    </table>
+</body>
+
+</html>
